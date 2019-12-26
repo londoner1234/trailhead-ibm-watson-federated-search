@@ -14,7 +14,7 @@ const discovery = new DiscoveryV1({
    apikey: process.env.DISCOVERY_APIKEY ,
   version: '2019-02-01'
 });
-
+console.log("apikey" + process.env.DISCOVERY_APIKEY) ; 
 exports.runQuery = (query, byId, callback) => {
   if (byId === "true") {
     query = "_id:" + query;
