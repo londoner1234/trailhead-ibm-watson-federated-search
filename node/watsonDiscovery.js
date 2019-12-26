@@ -1,21 +1,28 @@
 "use strict";
 
-var DiscoveryV1 = require("watson-developer-cloud/discovery/v1");
 
-var discovery = new DiscoveryV1({
-  username: process.env.WATSON_USERNAME,
-  password: process.env.WATSON_PASSWORD,
-  version_date: DiscoveryV1.VERSION_DATE_2017_04_27
+var env = require("node-env-file");
+// Load environment variables for localhost
+try {
+  console.log("__dirname" + __dirname);
+  env(__dirname + "//../.env");
+} catch (e) {}
+
+const DiscoveryV1 = require('ibm-watson/discovery/v1');
+
+const discovery = new DiscoveryV1({
+   apikey: process.env.DISCOVERY_APIKEY ,
+  version: '2019-02-01'
 });
 
 exports.runQuery = (query, byId, callback) => {
-  if (byId==='true') {
+  if (byId === "true") {
     query = "_id:" + query;
   }
   discovery.query(
     {
-      environment_id: process.env.ENVIRONMENT_ID,
-      collection_id: process.env.COLLECTION_ID,
+      environmentId: process.env.ENVIRONMENT_ID,
+      collectionId: process.env.COLLECTION_ID,
       query: query,
       count: 20
     },

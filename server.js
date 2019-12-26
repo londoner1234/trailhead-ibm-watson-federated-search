@@ -8,7 +8,8 @@ var env = require("node-env-file");
 
 // Load environment variables for localhost
 try {
-  env(__dirname + "/.env");
+  console.log("__dirname" + __dirname) ; 
+  env(__dirname + "//../.env");
 } catch (e) {}
 
 var app = express();
